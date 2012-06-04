@@ -1,0 +1,5 @@
+name = Islandora XML to list viewer
+description = Provides an unordered list view of XML data.
+package = Islandora Viewers
+version = 6.x-$Format:%h$-dev
+core = 6.x

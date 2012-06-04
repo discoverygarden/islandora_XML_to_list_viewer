@@ -1,0 +1,70 @@
+<?php
+/**
+ * @file
+ * @author: William Panting
+ * This is the global code for islandora_XML_to_list_viewer
+ */
+
+/**
+ * This function is the hook into the 'islandora viewer sphere' it reports that
+ * this module can handle the XML mime type and the theme function to call
+ * to use it.
+ *
+ * @param string $mime_type
+ *   The mime_type that is being queried for
+ *
+ * @return mixed
+ *   array: 'application/XML'=>'islandora_XML_to_list'
+ *   string : 'islandora_XML_to_list'
+ */
+function islandora_XML_to_list_viewer_islandora_viewers($mime_type = NULL) {
+  if ($mime_type == NULL) {
+    return array('application/xml' => 'islandora_XML_to_list');
+  }
+  elseif ($mime_type == 'application/xml') {
+    return 'islandora_XML_to_list';
+  }
+}
+
+/**
+ * This function makes available the islandora_XML_to_list theme.
+ * The theme will display an HTML unordered list
+ *
+ * @return array
+ *   the themes available from this module
+ */
+function islandora_XML_to_list_viewer_theme() {
+  return array(
+    'islandora_XML_to_list' => array(
+      'arguments' => array(
+        'pid' => NULL,
+        'dsid' => 'SWF',
+      ),
+      'template' => 'islandora_XML_to_list',
+    ),
+  );
+}
+
+/**
+ * This is a preprocessor function that
+ * will prepare to display XML data as an HTML list
+ *
+ * It will take the XML and format as a nested array
+ * in preparation for themeing.
+ *
+ * @param array $vars
+ *   The variables to prepare for themeing
+ */
+function islandora_XML_to_list_viewer_preprocess_islandora_XML_to_list(&$vars) {
+  $fedora_pid = $vars['pid'];
+  $dsid = $vars['dsid'];
+  module_load_include('object.inc', 'islandora_fedora_api');
+
+  $Fedora_object = new FedoraObject($fedora_pid);
+  $Fedora_object_datastreams = $Fedora_object->get_datastreams();
+  // Get the XML text from the datastream.
+  $XML_datastream = $Fedora_object_datastreams[$dsid];
+  $XML = $XML_datastream->__get('content');
+
+  $vars['XML_datastream'] = $XML;
+}
