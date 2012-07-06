@@ -30,7 +30,7 @@
     if ($element_attributes) :
       foreach ($element_attributes as $attribute) :
         print ('<LI>');
-          print ($attribute_name . ':  ' . $value);
+          print ('<STRONG>' . $attribute_name . '</STRONG> :  ' . $value);
         print ('</LI>');
       endforeach;
     endif;
