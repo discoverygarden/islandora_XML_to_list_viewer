@@ -19,9 +19,10 @@
  */
 function islandora_XML_to_list_viewer_islandora_viewers($mime_type = NULL) {
   if ($mime_type == NULL) {
-    return array('application/xml' => 'islandora_XML_to_list');
+    return array('application/xml' => 'islandora_XML_to_list',
+                 'text/xml' => 'islandora_XML_to_list');
   }
-  elseif ($mime_type == 'application/xml') {
+  elseif ($mime_type == 'application/xml' || $mime_type == 'text/xml') {
     return 'islandora_XML_to_list';
   }
 }
