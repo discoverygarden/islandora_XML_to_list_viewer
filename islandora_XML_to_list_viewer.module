@@ -6,9 +6,10 @@
  */
 
 /**
- * This function is the hook into the 'islandora viewer sphere' it reports that
- * this module can handle the XML mime type and the theme function to call
- * to use it.
+ * This function is the hook into the 'islandora viewer sphere'.
+ *
+ * It reports that this module can handle the XML mime type and the theme
+ * function to call to use it.
  *
  * @param string $mime_type
  *   The mime_type that is being queried for
@@ -30,6 +31,7 @@ function islandora_XML_to_list_viewer_islandora_viewers($mime_type = NULL) {
 
 /**
  * This function makes available the islandora_XML_to_list theme.
+ *
  * The theme will display an HTML unordered list
  *
  * @return array
@@ -48,8 +50,7 @@ function islandora_XML_to_list_viewer_theme() {
 }
 
 /**
- * This is a preprocessor function that
- * will prepare to display XML data as an HTML list
+ * Preprocessor function that will prepare to display XML data as an HTML list.
  *
  * It will take the XML and format as a nested array
  * in preparation for themeing.
@@ -58,8 +59,6 @@ function islandora_XML_to_list_viewer_theme() {
  *   The variables to prepare for themeing
  */
 function islandora_XML_to_list_viewer_preprocess_islandora_XML_to_list(&$vars) {
-  module_load_include('inc', 'fedora_repository', 'api/tuque');
-
-  $Fedora_object = islandora_object_load($vars['pid']);
-  $vars['XML_datastream'] = $Fedora_object[$vars['dsid']]->content;
+  $fedora_object = islandora_object_load($vars['pid']);
+  $vars['XML_datastream'] = $fedora_object[$vars['dsid']]->content;
 }

@@ -1,6 +1,6 @@
-name = Islandora XML to list viewer
-description = Provides an unordered list view of XML data.
+name = "Islandora XML to list viewer"
+description = "Provides an unordered list view of XML data."
 package = Islandora Viewers
-dependencies[] = fedora_repository
-version = 6.x-$Format:%h$-dev
-core = 6.x
+dependencies[] = islandora
+version = 7.x-dev
+core = 7.x
