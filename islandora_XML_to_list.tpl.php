@@ -48,7 +48,8 @@
   endif;
 
   // Get root document and call into the recursive function.
-  $datastream_DOM = DOMDocument::loadXML($XML_datastream);
+  $datastream_DOM = new DOMDocument();
+  $datastream_DOM->loadXML($XML_datastream);
   $XML_root_element = $datastream_DOM->documentElement;
 
   print('<UL>');
